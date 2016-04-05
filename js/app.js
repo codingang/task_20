@@ -24,17 +24,17 @@ function on(element,eventName,listener) {
 
 //绑定点击事件
 on(start_search,'click',function(e) {
-    for (var i = 0; i < arr.length; i++) {      //设置的颜色还原
+    var i= 0,
+        rg = new RegExp(str),      //正则表达式设置模糊查询
+        str = search_ipt.value;
+    for (i = 0; i < arr.length; i++) {      //设置的颜色还原
         box.children[i].style.backgroundColor = 'red';
     }
-
-    var str = search_ipt.value;
     if (!str || str == '') {
         alert('查询内容为空');
         return 0;
     }
-    var rg = new RegExp(str);      //正则表达式设置模糊查询
-    for (var i = 0; i < arr.length; i++) {
+    for (i = 0; i < arr.length; i++) {
         if (rg.test(arr[i])) {           //设置满足条件的颜色为blue
             box.children[i].style.backgroundColor = 'blue';
         }
@@ -46,7 +46,7 @@ on(start_search,'click',function(e) {
 on(btn_box,'click',function(e) {
     var str = ipt.value,
         i = 0,
-        strArr = str.split(/[ ,，、\n\t]/);   //用分割符分别存入数组
+        strArr = str.split(/[ ,，、 \n\t]/);   //用分割符分别存入数组
 
     for (i = 0; i < strArr.length; i++) {     //删除空的数组
         if (/^ *$/.test(strArr[i])) {
